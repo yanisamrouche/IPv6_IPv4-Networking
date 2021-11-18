@@ -1,0 +1,7 @@
+No.     Time           Source                Destination           Protocol Length Info
+      1 0.000000000    fe80::d264:26f4:c2c2:7b88 ff02::2               ICMPv6   48     Router Solicitation
+
+Frame 1: 48 bytes on wire (384 bits), 48 bytes captured (384 bits) on interface 0
+Raw packet data
+Internet Protocol Version 6, Src: fe80::d264:26f4:c2c2:7b88, Dst: ff02::2
+Internet Control Message Protocol v6

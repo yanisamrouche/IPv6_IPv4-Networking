@@ -1,0 +1,4 @@
+ip addr add 172.16.2.1/28 dev tun0
+ip link set tun0 up 
+sysctl -w net.ipv4.ip_forward=1
+
