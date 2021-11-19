@@ -41,20 +41,29 @@ int tun_alloc(char *dev)
   strcpy(dev, ifr.ifr_name);
   return fd;
 }
+char copyPacket(int src, int dst){
 
+    char buffer[100];
+    while(1){
+          read(src, buffer, sizeof(buffer));
+          write(1, buffer, sizeof(buffer));
+      }
+      return buffer;
+
+}
 int main (int argc, char** argv){
-
+  char response;
   int tunfd;
-  printf("Création de %s\n",argv[1]);
+  //printf("Création de %s\n",argv[1]);
   tunfd = tun_alloc(argv[1]);
-  printf("tunfd > %d ",tunfd);
-  printf("Faire la configuration de %s...\n",argv[1]);
+  /*printf("Faire la configuration de %s...\n",argv[1]);
   printf("Appuyez sur une touche pour continuer\n");
   getchar();
   printf("Interface %s Configurée:\n",argv[1]);
   system("ip addr");
   printf("Appuyez sur une touche pour terminer\n");
-  
   getchar();
+  */
+  response = copyPacket(tunfd, 1);
   return 0;
 }
