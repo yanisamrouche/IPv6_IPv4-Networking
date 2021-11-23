@@ -1,4 +1,3 @@
-#include "extremite.h"
 #include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +13,7 @@
 #include <fcntl.h>
 #include <linux/if.h>
 #include <linux/if_tun.h>
+#include "extremite.h"
 
 
 char tun[256];
@@ -82,31 +82,22 @@ void read_file_configuration(char *filename) {
 int main (int argc, char** argv){
   //char response;
   int tunfd;
-  printf("Création de %s\n",tun);
-  printf("Faire la configuration de %s...\n",tun);
-  printf("Appuyez sur une touche pour continuer\n");
-  getchar();
-  printf("Interface %s Configurée:\n",tun);
-  system("ip addr");
-  printf("Appuyez sur une touche pour terminer\n");
-  getchar();
-
   //response = copyPacket(tunfd, 1);
   read_file_configuration(argv[1]);
-    tunfd = tun_alloc(tun);
-	int f = fork();
-	if (f != 0) {
+  tunfd = tun_alloc(tun);
+  int f = fork();
+  if (f != 0) {
 		//Serveur
-		printf("-----SERVEUR-----");
-		ext_out(inport, tunfd);
+		printf("-----SERVEUR----- \n");
+		ext_out_(inport, tunfd);
 		kill(f, SIGKILL);
-	}
-	else {
+  }
+  else {
 		//Client
 		printf("CLIENT : %s (port : %s)\n-----Entrer pour continuer-----\n", outip, outport);
 		getchar();
-		ext_in(outip, outport, tunfd);
+		ext_in_(outip, outport, tunfd);
 		kill(getppid(), SIGKILL);
-	}
+  }
   return 0;
 }
